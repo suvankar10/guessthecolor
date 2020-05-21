@@ -6,6 +6,7 @@ var GUESS_INCORRECT_FLAG = 1;
 var QUIT_FLAG = 2;
 var total_rounds;
 var user_name;
+var final_score;
 //Execution starts from here-----------
 $(document).ready(function(){
   console.log("info: document ready.");
@@ -17,7 +18,7 @@ $(document).ready(function(){
 });
 function quitGame(){
   if(curr_round>total_rounds){
-    alert(user_name+", game ended already!");
+    alert(user_name+", thank you for playing!");
     reloadGame();
   }else{
     var confirmed = confirm(user_name+", do you really want to quit?");
@@ -79,6 +80,7 @@ function getScore(flag){
     method:'GET',
     success:function(data){
       if(data != -99){//-99 is used for any database operation error
+          final_score = data;
         if(flag == 0){//correct guess
           alert(user_name+' you guessed correct! Your final score is: '+data);
 
@@ -184,12 +186,12 @@ function play(id){
       var server_color_code = getFibonacciNumber(curr_round);
       console.log("info - server color code : ",server_color_code);
       if(server_color_code == -1){//game ended
-        alert("Sorry "+user_name+", game ended!");
+        alert("Sorry "+user_name+", game ended!Your score is: "+final_score);
       }else{//game continuing
        matchColorCodes(user_color_code,server_color_code);
       }
     }else{//game ended
-      alert("Sorry "+user_name+", game ended!");
+      alert("Sorry "+user_name+", game ended! Your score is: "+final_score);
     }
     
         
