@@ -3,7 +3,7 @@ session_start();
 include('db_config.php');
 
 if($_POST && !empty($_POST['user_name'])){
-
+//user data---------------------------------
     $_SESSION['user_name'] = $_POST['user_name'];
     $_SESSION['user_id'] = uniqid();
     
@@ -12,22 +12,22 @@ if($_POST && !empty($_POST['user_name'])){
 // Check connection
     if ($conn->connect_error) {
      die("Connection failed: " . $conn->connect_error);
-     echo FALSE;
+     echo FALSE;//for database connection error
     }
 
     $sql = "INSERT INTO User_Data (USER_ID, USER_NAME) VALUES ('".$_SESSION['user_id']."','".$_SESSION['user_name']."')";
 
     if ($conn->query($sql) === TRUE) {
-      echo TRUE;
+      echo TRUE;//if query successfully executed
     } else {
-     echo FALSE;
+     echo FALSE;//if query execution is unsuccessful
     }
 
     $conn->close();
 
 
 }else{
-    echo FALSE;
+    echo FALSE;//if encounter a post error
 }
 
 ?>
